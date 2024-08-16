@@ -1,0 +1,17 @@
+#! /bin/bash
+
+DOT_PACKAGES=$(ls -F | grep -E "\/$" | sed "s/\///g")
+
+for folder in $DOT_PACKAGES; do
+    
+    if ["$folder" == 'stow-create-links']; then
+        continue
+    fi
+
+    echo "[+] Folder :: $folder"
+    stow --ignore=README.md -t $HOME -D $folder
+    stow -v -t $HOME $folder
+done
+
+echo "[+] Reloading shell"
+exec $SHELL -l

@@ -1,0 +1,137 @@
+" OPTIONS ----------------------------------------------------------------------------------------------------------{{{
+
+""" Idea specific settings ------------------
+set ideajoin
+set ideastatusicon=gray
+idearefactormode=keep
+"""" ----------------------------------------
+set showmode
+set history=200		" keep 200 lines of command line history
+set ruler		    " show the cursor position all the time
+set wildmenu		" display completion matches in a status line
+set notimeout	    " wait up to 100ms after Esc for special key
+set tabstop = 4     " Set shift width to 4 spaces.
+set shiftwidth=4    " Set tab width to 4 columns.
+set expandtab       " Use space characters instead of tabs.
+set backspace=indent,eol,start " Allow backspacing over everything in insert mode.
+""" Wrap Text
+set display=truncate " Show @@@ in the last line if it is truncated.
+set wrap!
+""" Editor Lines
+set cursorline
+set number " show current line number
+set relativenumber " use relative numbers around current line to facilitate jumps
+""" Yanks
+let g:highlightedyank_highlight_duration = 100 "Duration of the yank
+let g:highlightedyank_highlight_color = "rgba(160, 160, 160, 155)" "Color of the highlight
+"""" ----------------------------------------
+""" Search
+set ignorecase  " Ignore cases when searching
+set smartcase   " Use case sensitive when use upper case
+set incsearch   " While searching though a file incrementally highlight matching characters as you type.
+set showmatch   " Show matching words during search
+" }}}
+
+
+""" MAPPINGS ---------------------------------------------------------------------------------------------------- {{{
+""" NERD Tree
+nnoremap <leader>ef :NERDTreeToggle<CR>
+
+let g:NERDTreeMapActivateNode    = 'l'
+let g:NERDTreeMapOpenSplit       = 'i'
+let g:NERDTreeMapOpenVSplit      = 's'
+let g:NERDTreeMapJumpRoot        = 'H'
+let g:NERDTreeMapJumpParent      = 'K'
+let g:NERDTreeMapDelete          = 'D'
+let g:NERDTreeMapNewFile         = 'a'
+let g:NERDTreeMapNewDir          = 'd'
+let g:NERDTreeMapOpenRecursively = 'o'
+let g:NERDTreeMapCloseChildren   = 'x'
+
+let NERDTreeIgnore=['\.git$', '\.jpg$', '\.mp4$', '\.ogg$', '\.iso$', '\.pdf$', '\.pyc$', '\.odt$', '\.png$', '\.gif$', '\.db$']
+ }}}
+
+""" WHICH-KEY
+set which-key
+
+let mapleader = ' '
+""" Search
+nnoremap <C-l> :nohlsearch<CR>
+""" Yanks
+nnoremap Y y$
+nnoremap <leader>y "+y
+"""Console Movements
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+"""Line Movements
+nnoremap n nzzzv
+nnoremap N Nzzzv
+"""Move Lines
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+""" Window Management =======================================
+"" Splits
+nnoremap wu :bp<CR>
+nnoremap wb :split<CR>
+nnoremap wr :vsplit<CR>
+nnoremap wq :close<CR>
+nnoremap wk <c-w>k
+nnoremap wj <c-w>j
+nnoremap wl <c-w>l
+nnoremap wh <c-w>h
+"""Harpoon
+nmap <leader>wh <action>(HarpoonerOpenFile0)
+nmap <leader>wj <action>(HarpoonerOpenFile1)
+nmap <leader>wk <action>(HarpoonerOpenFile2)
+nmap <leader>wl <action>(HarpoonerOpenFile3)
+nmap <leader>hw <action>(HarpoonerQuickMenu)
+nmap <leader>ha <action>(HarpoonerAddFile)
+""" Activate Tool Windows
+nmap <leader>vr <Action>(ActivateRunToolWindow)
+nmap <leader>vd <Action>(ActivateDebugToolWindow)
+nmap <leader>vt <Action>(ActivateTerminalToolWindow)
+nmap <leader>vh <Action>(TypeHierarchy)
+""" Find
+nmap <leader>fu <Action>(FindUsages)
+nmap <leader>fg <Action>(FindInPath)
+nmap <leader>ff <Action>(GotoFile)
+nmap <leader>fb <Action>(Switcher)
+nmap <leader>fi <Action>(GotoImplementation)
+nmap <leader>fd <Action>(GotoTypeDeclaration)
+nmap <leader>ft <Action>(GotoTest)
+vmap gc <Action>(CommentByLineComment)
+""" Error Movements
+nmap <leader>el <Action>(GotoNextError)
+nmap <leader>eh <Action>(GotoPreviousError)
+""" Refactorings
+imap <M-h>            <Action>(ParameterInfo)
+nmap <leader><leader> <Action>(ShowHoverInfo)
+nmap <leader>re       <Action>(ReformatCode)
+nmap <leader>rt       <Action>(Refactorings.QuickListPopupAction)
+vmap <leader>rt       <Action>(Refactorings.QuickListPopupAction)
+nmap <leader>oi       <Action>(OptimizeImports)
+nmap <leader>ca       <Action>(ShowIntentionActions)
+nmap <leader>su       <Action>(ShowUsages)
+nmap <leader>suh      <Action>(HighlightUsagesInFile)
+nmap <leader>x        <Action>(HideAllWindows)
+nmap <leader>ei       <Action>(ExtractInterface)
+vmap em               <Action>(ExtractMethod)
+vmap ec               <Action>(ExtractConstant)
+""" Run
+nmap <leader>rr <Action>(Run)
+nmap <leader>rc <Action>(RunClass)
+nmap <leader>rq <Action>(Stop)
+nmap <leader>dd <Action>(Debug)
+nmap <leader>dc <Action>(DebugClass)
+nmap <leader>bb <Action>(ToggleLineBreakpoint)
+nmap <A-j>      <Action>(StepInto)
+nmap <A-k>      <Action>(StepOver)
+""" Zen Mode
+nmap <leader>z <Action>(ToggleDistractionFreeMode)
+
+" PLUGINS ---------------------------------------------------------------- {{{
+Plug 'dense-analysis/ale'
+Plug 'preservim/nerdtree'
+Plug 'machakann/vim-highlightedyank'
+Plug 'tpope/vim-surround'
+" }}}
