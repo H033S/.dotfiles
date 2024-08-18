@@ -27,6 +27,16 @@ return {
     config = function()
         local lspconfig = require("lspconfig")
         local capabilities = require("cmp_nvim_lsp").default_capabilities()
+        local border = {
+            { '┌', 'FloatBorder' },
+            { '─', 'FloatBorder' },
+            { '┐', 'FloatBorder' },
+            { '│', 'FloatBorder' },
+            { '┘', 'FloatBorder' },
+            { '─', 'FloatBorder' },
+            { '└', 'FloatBorder' },
+            { '│', 'FloatBorder' },
+        }
 
         require("fidget").setup({})
         require("mason").setup({
@@ -53,6 +63,10 @@ return {
                     if server_name ~= "jdtls" then
                         lspconfig[server_name].setup({
                             capabilities = capabilities,
+                            handlers = {
+                                ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
+                                ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {border = border})
+                            }
                         })
                     end
                 end,
