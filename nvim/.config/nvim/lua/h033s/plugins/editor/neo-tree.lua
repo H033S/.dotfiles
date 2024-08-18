@@ -133,7 +133,7 @@ return {
                     ["y"] = "copy_to_clipboard",
                     ["x"] = "cut_to_clipboard",
                     ["p"] = "paste_from_clipboard",
-                    ["<M-h>"] = "toggle_hidden",
+                    ["<C-h>"] = "toggle_hidden",
                     ["H"] = "none",
                 },
             },

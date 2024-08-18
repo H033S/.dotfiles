@@ -95,14 +95,19 @@ return {
         local icons = require("h033s.utils.icons")
 
         cmp.setup({
-            completion = {
-                preselect = "item",
-                completeopt = "menu,menuone,noinsert",
-            },
             snippet = {
                 expand = function(args)
                     require("luasnip").lsp_expand(args.body)
                 end,
+            },
+            completion = {
+                preselect = "item",
+                completeopt = "menu,menuone,noinsert",
+            },
+            window = {
+                -- Add borders to completions popups
+                completion = cmp.config.window.bordered(),
+                documentation = cmp.config.window.bordered(),
             },
             mapping = cmp.mapping.preset.insert({
                 ["<M-k>"] = cmp.mapping.select_prev_item(cmp_select),
@@ -116,11 +121,6 @@ return {
                 { name = "buffer" },
                 { name = "path" },
             }),
-            window = {
-                -- Add borders to completions popups
-                completion = cmp.config.window.bordered(),
-                documentation = cmp.config.window.bordered(),
-            },
             experimental = {
                 ghost_text = false,
             },
@@ -140,7 +140,6 @@ return {
                         vim_item.kind = icons.misc.Smiley
                         vim_item.kind_hl_group = "CmpItemKindEmoji"
                     end
-
                     if entry.source.name == "cmp_tabnine" then
                         vim_item.kind = icons.misc.Robot
                         vim_item.kind_hl_group = "CmpItemKindTabnine"
@@ -157,15 +156,14 @@ return {
             { name = "DiagnosticSignHint",  text = icons.diagnostics.Hint },
             { name = "DiagnosticSignInfo",  text = icons.diagnostics.Information },
         }
-
         vim.diagnostic.config({
             signs = {
                 active = true,
                 values = signValues,
             },
-            virtual_text = false,
-            update_in_insert = false,
-            underline = true,
+            virtual_text = true,
+            update_in_insert = true,
+            underline = false,
             severity_sort = true,
             float = {
                 focusable = true,

@@ -15,10 +15,29 @@ vim.list_extend(
     vim.split(vim.fn.glob(vim.env.HOME .. "/.local/share/nvim/mason/share/java-test/*.jar", 1), "\n")
 )
 
+local perOSConfigs = {
+    linux = {
+        config = "config_linux",
+        javaHome = ""
+    },
+    mac = {
+        config = "config_mac",
+        javaHome = "/Library/Java/JavaVirtualMachines/zulu-21.jdk/Contents/Home"
+    }
+}
+local getConfigsPerOS = function()
+    if vim.loop.os_uname().sysname == "Darwin" then
+        return perOSConfigs.mac
+    else
+        return perOSConfigs.linux
+    end
+end
+
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
 local config = {
     -- The command that starts the language server
     -- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
+
     cmd = {
         "java",
         "-Declipse.application=org.eclipse.jdt.ls.core.id1",
@@ -40,7 +59,7 @@ local config = {
 
         -- DONE: Update this to point to the correct jdtls subdirectory for your OS (config_linux, config_mac, config_win, etc)
         "-configuration",
-        vim.env.HOME .. "/.local/share/nvim/mason/packages/jdtls/config_mac",
+        vim.env.HOME .. "/.local/share/nvim/mason/packages/jdtls/" .. getConfigsPerOS().config,
         ------------------------------------------------------------------------------------------------------------------------
         "-data",
         workspace_dir,
@@ -55,7 +74,7 @@ local config = {
     settings = {
         java = {
             -- DONE: Replace this with the absolute path to your main java version (JDK 17 or higher)
-            home = "/Library/Java/JavaVirtualMachines/zulu-21.jdk/Contents/Home",
+            home = getConfigsPerOS().javaHome,
             eclipse = {
                 downloadSources = true,
             },
@@ -144,8 +163,6 @@ local config = {
 
 -- Needed for debugging
 config["on_attach"] = function(client, bufnr)
-    print("HELLLO NVIM ENTERED INTO ATTACH")
-
     local buf_set_keymap = function(mode, lhs, rhs, opts)
         opts = vim.tbl_extend("force", { noremap = true, silent = true }, opts or {})
         vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts)
@@ -187,13 +204,9 @@ config["on_attach"] = function(client, bufnr)
         { desc = "Extract Method" }
     )
 
-    vim.api.nvim_create_autocmd("BufWritePre", {
-        group = vim.api.nvim_create_augroup("Format", { clear = true }),
-        buffer = bufnr,
-        callback = function()
-            vim.lsp.buf.format()
-        end,
-    })
+    buf_set_keymap("n", "<leader>fb", function()
+        vim.lsp.buf.format({ timeout_ms = 500 })
+    end, { desc = "Format Buffer" })
 
     jdtls.setup_dap({ hotcodereplace = "auto" })
     require("jdtls.dap").setup_dap_main_class_configs()

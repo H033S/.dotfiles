@@ -16,12 +16,5 @@ return {
                 -- null_ls.builtins.diagnostics.flake8,
             },
         })
-
-        vim.api.nvim_create_autocmd("BufWritePre", {
-            pattern = "*",
-            callback = function(args)
-                vim.lsp.buf.format({ timeout_ms = 2000 })
-            end,
-        })
     end,
 }
