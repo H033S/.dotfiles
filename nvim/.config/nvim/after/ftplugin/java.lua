@@ -176,37 +176,29 @@ config["on_attach"] = function(client, bufnr)
         { desc = "Test Nearest Method" }
     )
     buf_set_keymap(
-    -- { "n", "v" },
         "n",
         "<leader>oi",
         "<CMD>lua require('jdtls').organize_imports()<CR>",
         { desc = "Organize Imports" }
     )
     buf_set_keymap(
-    -- { "n", "v" },
         "n",
         "<leader>ec",
         "<CMD>lua require('jdtls').extract_constant()<CR>",
         { desc = "Extract Constant" }
     )
     buf_set_keymap(
-    -- { "n", "v" },
         "n",
         "<leader>ev",
         "<CMD>lua require('jdtls').extract_variable()<CR>",
         { desc = "Extract variable" }
     )
     buf_set_keymap(
-    -- { "n", "v" },
         "n",
         "<leader>em",
         "<CMD>lua require('jdtls').extract_method()<CR>",
         { desc = "Extract Method" }
     )
-
-    buf_set_keymap("n", "<leader>fb", function()
-        vim.lsp.buf.format({ timeout_ms = 500 })
-    end, { desc = "Format Buffer" })
 
     jdtls.setup_dap({ hotcodereplace = "auto" })
     require("jdtls.dap").setup_dap_main_class_configs()
