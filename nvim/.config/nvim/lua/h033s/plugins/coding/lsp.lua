@@ -28,14 +28,14 @@ return {
         local lspconfig = require("lspconfig")
         local capabilities = require("cmp_nvim_lsp").default_capabilities()
         local border = {
-            { '┌', 'FloatBorder' },
-            { '─', 'FloatBorder' },
-            { '┐', 'FloatBorder' },
-            { '│', 'FloatBorder' },
-            { '┘', 'FloatBorder' },
-            { '─', 'FloatBorder' },
-            { '└', 'FloatBorder' },
-            { '│', 'FloatBorder' },
+            { "┌", "FloatBorder" },
+            { "─", "FloatBorder" },
+            { "┐", "FloatBorder" },
+            { "│", "FloatBorder" },
+            { "┘", "FloatBorder" },
+            { "─", "FloatBorder" },
+            { "└", "FloatBorder" },
+            { "│", "FloatBorder" },
         }
 
         require("fidget").setup({})
@@ -64,9 +64,12 @@ return {
                         lspconfig[server_name].setup({
                             capabilities = capabilities,
                             handlers = {
-                                ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
-                                ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {border = border})
-                            }
+                                ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
+                                ["textDocument/signatureHelp"] = vim.lsp.with(
+                                    vim.lsp.handlers.signature_help,
+                                    { border = border }
+                                ),
+                            },
                         })
                     end
                 end,
@@ -193,5 +196,49 @@ return {
                 numhl = sign.name,
             })
         end
+
+        telescope = require("telescope.builtin")
+
+        vim.api.nvim_create_autocmd("LspAttach", {
+            callback = function(ev)
+                local opts = { buffer = ev.bufnr, remap = false }
+                vim.keymap.set("n", "K", function()
+                    vim.lsp.buf.hover()
+                end, opts)
+                vim.keymap.set("i", "<M-h>", function()
+                    vim.lsp.buf.signature_help()
+                end, opts)
+                vim.keymap.set("n", "gd", function()
+                    telescope.lsp_definitions()
+                end, opts)
+                vim.keymap.set("n", "gi", function()
+                    telescope.lsp_implementations()
+                end, opts)
+                vim.keymap.set("n", "gr", function()
+                    telescope.lsp_references()
+                end, opts)
+                vim.keymap.set("n", "<leader>rn", function()
+                    vim.lsp.buf.rename()
+                end, opts)
+                vim.keymap.set("n", "<leader>ca", function()
+                    vim.lsp.buf.code_action()
+                end, opts)
+                vim.keymap.set("n", "<leader>vd", function()
+                    vim.diagnostic.open_float()
+                end, opts)
+                vim.keymap.set("n", "<leader>q", function()
+                    vim.diagnostic.setqflist()
+                end, opts)
+                vim.keymap.set("n", "<leader>e", function()
+                    vim.diagnostic.open_float()
+                end, opts)
+                vim.keymap.set("n", "<leader>dl", function()
+                    vim.diagnostic.goto_next()
+                end, opts)
+                vim.keymap.set("n", "<leader>dh", function()
+                    vim.diagnostic.goto_prev()
+                end, opts)
+            end,
+        })
     end,
 }
