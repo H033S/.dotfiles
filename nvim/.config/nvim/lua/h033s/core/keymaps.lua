@@ -32,8 +32,3 @@ vim.keymap.set("n", "<leader>tw", function()
     local bufferDirectory = vim.fn.fnamemodify(bufferFilePath, ":p:h")
     vim.cmd(string.format(":botright new | call termopen(&shell, #{cwd: '%s'})", bufferDirectory))
 end)
-
-vim.keymap.set("n", "<leader>fb", function()
-    vim.lsp.buf.format({ timeout_ms = 500 })
-end, { desc = "Format file" })
-

@@ -36,7 +36,7 @@ return {
 
         require("rose-pine").setup({
             styles = {
-                transparency = false--true,
+                transparency = true
             },
         })
 

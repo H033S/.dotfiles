@@ -18,19 +18,33 @@ vim.list_extend(
 local perOSConfigs = {
     linux = {
         config = "config_linux",
-        javaHome = ""
+        javaHome = "",
     },
     mac = {
         config = "config_mac",
-        javaHome = "/Library/Java/JavaVirtualMachines/zulu-21.jdk/Contents/Home"
-    }
+        javaHome = "/Library/Java/JavaVirtualMachines/zulu-21.jdk/Contents/Home",
+    },
 }
+
 local getConfigsPerOS = function()
     if vim.loop.os_uname().sysname == "Darwin" then
         return perOSConfigs.mac
     else
         return perOSConfigs.linux
     end
+end
+
+local getBorders = function()
+    return {
+        { "┌", "FloatBorder" },
+        { "─", "FloatBorder" },
+        { "┐", "FloatBorder" },
+        { "│", "FloatBorder" },
+        { "┘", "FloatBorder" },
+        { "─", "FloatBorder" },
+        { "└", "FloatBorder" },
+        { "│", "FloatBorder" },
+    }
 end
 
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
@@ -152,6 +166,11 @@ local config = {
     },
     -- Needed for auto-completion with method signatures and placeholders
     capabilities = require("cmp_nvim_lsp").default_capabilities(),
+    handlers = {
+        ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = getBorders() }),
+        ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = getBorders() }),
+    },
+
     flags = {
         allow_incremental_sync = true,
     },
@@ -175,30 +194,10 @@ config["on_attach"] = function(client, bufnr)
         "<CMD>lua require('jdtls').test_nearest_method()<CR>",
         { desc = "Test Nearest Method" }
     )
-    buf_set_keymap(
-        "n",
-        "<leader>oi",
-        "<CMD>lua require('jdtls').organize_imports()<CR>",
-        { desc = "Organize Imports" }
-    )
-    buf_set_keymap(
-        "n",
-        "<leader>ec",
-        "<CMD>lua require('jdtls').extract_constant()<CR>",
-        { desc = "Extract Constant" }
-    )
-    buf_set_keymap(
-        "n",
-        "<leader>ev",
-        "<CMD>lua require('jdtls').extract_variable()<CR>",
-        { desc = "Extract variable" }
-    )
-    buf_set_keymap(
-        "n",
-        "<leader>em",
-        "<CMD>lua require('jdtls').extract_method()<CR>",
-        { desc = "Extract Method" }
-    )
+    buf_set_keymap("n", "<leader>oi", "<CMD>lua require('jdtls').organize_imports()<CR>", { desc = "Organize Imports" })
+    buf_set_keymap("n", "<leader>ec", "<CMD>lua require('jdtls').extract_constant()<CR>", { desc = "Extract Constant" })
+    buf_set_keymap("n", "<leader>ev", "<CMD>lua require('jdtls').extract_variable()<CR>", { desc = "Extract variable" })
+    buf_set_keymap("n", "<leader>em", "<CMD>lua require('jdtls').extract_method()<CR>", { desc = "Extract Method" })
 
     jdtls.setup_dap({ hotcodereplace = "auto" })
     require("jdtls.dap").setup_dap_main_class_configs()
