@@ -39,6 +39,7 @@ return {
 		}
 
 		require("fidget").setup({})
+        require("fidget.notification.window").options.winblend = 0;
 		require("mason").setup({
 			ui = {
 				border = "rounded",
