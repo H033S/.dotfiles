@@ -17,7 +17,7 @@
                     "template": " \ue235 {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }} "
                 },
                 {
-                    "foreground": "#ffffff",
+                    "foreground": "#3A86FF",
                     "style": "plain",
                     "template": "{{ .UserName }}@{{ .HostName }} ",
                     "type": "session"
