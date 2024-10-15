@@ -56,6 +56,7 @@ return {
 				"jdtls",
 				"jsonls",
 				"lemminx",
+                "gopls"
 			},
 			handlers = {
 
