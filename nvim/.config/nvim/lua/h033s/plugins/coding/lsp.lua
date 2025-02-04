@@ -39,7 +39,7 @@ return {
 		}
 
 		require("fidget").setup({})
-        require("fidget.notification.window").options.winblend = 0;
+		require("fidget.notification.window").options.winblend = 0
 		require("mason").setup({
 			ui = {
 				border = "rounded",
@@ -56,7 +56,9 @@ return {
 				"jdtls",
 				"jsonls",
 				"lemminx",
-                "gopls"
+				"gopls",
+				"yamlls",
+                "graphql-language-service-cli"
 			},
 			handlers = {
 
@@ -88,6 +90,23 @@ return {
 						json = {
 							schemas = require("schemastore").json.schemas(),
 							validate = { enable = true },
+						},
+					},
+				}),
+
+				lspconfig["yamlls"].setup({
+                    capabilities = capabilities,
+					settings = {
+						yaml = {
+							validate = true,
+							schemaStore = {
+								enable = false,
+								url = "",
+							},
+							schemas = {
+								["https://raw.githubusercontent.com/docker/compose/master/compose/config/compose_spec.json"] = "docker-compose*.{yml,yaml}",
+								["https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/argoproj.io/application_v1alpha1.json"] = "argocd-application.yaml",
+							},
 						},
 					},
 				}),
