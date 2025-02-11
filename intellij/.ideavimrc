@@ -16,7 +16,7 @@ set expandtab       " Use space characters instead of tabs.
 set backspace=indent,eol,start " Allow backspacing over everything in insert mode.
 """ Wrap Text
 set display=truncate " Show @@@ in the last line if it is truncated.
-set wrap!
+set nowrap
 """ Editor Lines
 set cursorline
 set number " show current line number
@@ -35,7 +35,6 @@ set showmatch   " Show matching words during search
 
 """ MAPPINGS ---------------------------------------------------------------------------------------------------- {{{
 """ NERD Tree
-nnoremap <leader>ef :NERDTreeToggle<CR>
 
 let g:NERDTreeMapActivateNode    = 'l'
 let g:NERDTreeMapOpenSplit       = 'i'
@@ -51,6 +50,7 @@ let g:NERDTreeMapCloseChildren   = 'x'
 let NERDTreeIgnore=['\.git$', '\.jpg$', '\.mp4$', '\.ogg$', '\.iso$', '\.pdf$', '\.pyc$', '\.odt$', '\.png$', '\.gif$', '\.db$']
  }}}
 
+nmap <leader>ef :NERDTreeToggle<CR>
 """ WHICH-KEY
 set which-key
 
@@ -118,8 +118,8 @@ nmap <leader>ei       <Action>(ExtractInterface)
 vmap em               <Action>(ExtractMethod)
 vmap ec               <Action>(ExtractConstant)
 """ Run
-nmap <leader>rr <Action>(Run)
-nmap <leader>rc <Action>(RunClass)
+nmap <leader>rr <Action>(RunClass)
+nmap <leader>rc <Action>(RunCoverage)
 nmap <leader>rq <Action>(Stop)
 nmap <leader>dd <Action>(Debug)
 nmap <leader>dc <Action>(DebugClass)
