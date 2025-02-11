@@ -1,0 +1,10 @@
+[user]
+	email = tonito.nazco@gmail.com
+	name = H033S
+[core]
+	autocrlf = input
+[init]
+	defaultBranch = main
+[alias]
+    hist = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)[%an]%Creset' --abbrev-commit
+    ahist = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)[%an]%Creset' --abbrev-commit --all
