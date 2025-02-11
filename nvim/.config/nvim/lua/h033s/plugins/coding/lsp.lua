@@ -58,7 +58,7 @@ return {
 				"lemminx",
 				"gopls",
 				"yamlls",
-                "graphql-language-service-cli"
+				-- "graphql-language-service-cli",
 			},
 			handlers = {
 
@@ -95,7 +95,7 @@ return {
 				}),
 
 				lspconfig["yamlls"].setup({
-                    capabilities = capabilities,
+					capabilities = capabilities,
 					settings = {
 						yaml = {
 							validate = true,
