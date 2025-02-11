@@ -1,6 +1,6 @@
 alias l="ls -F"
 alias la="ls -aF"
 alias icloud="cd /Users/tonynazcomenendez/Library/Mobile\ Documents/com~apple~CloudDocs/"
-alias notes="cd /Users/tonynazcomenendez/Documents/Obsidian\ Vault/"
+alias notes="cd /Users/tonynazcomenendez/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/iCloud\ Storage"
 alias sshon="eval \"$(ssh-agent -s)\""
 alias ocelot="ssh ocelot.aul.fiu.edu -l anazc005 -i ~/.ssh/ocelot.anazc005"
