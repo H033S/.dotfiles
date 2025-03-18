@@ -1,5 +1,4 @@
 return {
-	-- https://github.com/rcarriga/nvim-dap-ui
 	"rcarriga/nvim-dap-ui",
 	event = "VeryLazy",
 	dependencies = {
@@ -7,6 +6,7 @@ return {
 		"nvim-neotest/nvim-nio",
 		"theHamsta/nvim-dap-virtual-text",
 		"nvim-telescope/telescope-dap.nvim",
+		"mfussenegger/nvim-dap-python",
 	},
 	opts = {
 		controls = {
@@ -87,6 +87,7 @@ return {
 	config = function(_, opts)
 		local dap = require("dap")
 		require("dapui").setup(opts)
+		require("dap-python").setup(vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python")
 
 		dap.listeners.after.event_initialized["dapui_config"] = function()
 			require("dapui").open()
@@ -102,7 +103,7 @@ return {
 			-- require('dapui').close()
 		end
 
-		vim.keymap.set("n", "<leader>br", require("dap").clear_breakpoints, { desc = "Debug Clear Breakpoints" })
+		vim.keymap.set("n", "<leader>bC", require("dap").clear_breakpoints, { desc = "Debug Clear Breakpoints" })
 		vim.keymap.set("n", "<leader>bb", require("dap").toggle_breakpoint, { desc = "Debug Toggle Breakpoint" })
 		vim.keymap.set("n", "<leader>bc", function()
 			require("dap").set_breakpoint(vim.fn.input("Debug Breakpoint condition: "))

@@ -38,6 +38,10 @@ return {
 				neotest.run.run(vim.fn.expand("%"))
 			end, { desc = "Run File" })
 
+			vim.keymap.set("n", "<leader>dra", function()
+				neotest.run.run({strategy = "dap", target = "nearest"})
+			end, { desc = "Run Nearest Test" })
+
 			vim.keymap.set("n", "<leader>tra", function()
 				neotest.run.run()
 			end, { desc = "Run Nearest Test" })
