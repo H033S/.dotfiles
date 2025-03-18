@@ -4,3 +4,8 @@ alias icloud="cd /Users/tonynazcomenendez/Library/Mobile\ Documents/com~apple~Cl
 alias notes="cd /Users/tonynazcomenendez/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/iCloud\ Storage"
 alias sshon="eval \"$(ssh-agent -s)\""
 alias ocelot="ssh ocelot.aul.fiu.edu -l anazc005 -i ~/.ssh/ocelot.anazc005"
+
+
+# Adding Java Utilities
+alias java-17="export JAVA_HOME=`/usr/libexec/java_home -v 17`"
+alias java-21="export JAVA_HOME=`/usr/libexec/java_home -v 21`"
