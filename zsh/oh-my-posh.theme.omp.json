@@ -13,14 +13,29 @@
                         "home_enabled": true
                     },
                     "powerline_symbol": "\ue0b0",
-                    "foreground": "#100e23",
+                    "foreground": "#ffffff",
                     "template": " \ue235 {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }} "
                 },
                 {
-                    "foreground": "#3A86FF",
+                    "type": "angular",
                     "style": "plain",
-                    "template": "{{ .UserName }}@{{ .HostName }} ",
-                    "type": "session"
+                    "foreground": "#ffffff",
+                    "display_mode": "files",
+                    "template": "  {{ .Full }}"
+                },
+                {
+                    "type": "react",
+                    "style": "plain",
+                    "foreground": "#ffffff",
+                    "display_mode": "files",
+                    "template": "  {{ .Full }}"
+                },
+                {
+                    "type": "npm",
+                    "style": "plain",
+                    "foreground": "#ffffff",
+                    "display_mode": "files",
+                    "template": "  {{ .Full }} "
                 },
                 {
                     "foreground": "#33DD2D",
