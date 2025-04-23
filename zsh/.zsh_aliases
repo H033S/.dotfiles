@@ -1,7 +1,7 @@
 alias l="ls -F"
 alias la="ls -aF"
 alias icloud="cd /Users/tonynazcomenendez/Library/Mobile\ Documents/com~apple~CloudDocs/"
-alias notes="cd /Users/tonynazcomenendez/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/iCloud\ Storage"
+alias notes="cd /Users/tonynazcomenendez/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Personal"
 alias sshon="eval \"$(ssh-agent -s)\""
 alias ocelot="ssh ocelot.aul.fiu.edu -l anazc005 -i ~/.ssh/ocelot.anazc005"
 
@@ -9,3 +9,55 @@ alias ocelot="ssh ocelot.aul.fiu.edu -l anazc005 -i ~/.ssh/ocelot.anazc005"
 # Adding Java Utilities
 alias java-17="export JAVA_HOME=`/usr/libexec/java_home -v 17`"
 alias java-21="export JAVA_HOME=`/usr/libexec/java_home -v 21`"
+
+alias g=git
+alias ga="git add"
+alias gs="git status"
+alias gh="git hist"
+alias gha="git ahist"
+alias gl="git pull"
+alias gp="git push"
+alias gb="git branch"
+alias gck="git checkout"
+alias gsw="git switch"
+alias gc="git commit"
+alias gd="git diff"
+alias gdc="git diff --cached"
+alias gsh="git stash"
+alias gshp="git stash pop"
+alias gshd="git stash drop"
+
+# Will return the current branch name
+# Usage example: git pull origin $(current_branch)
+#
+function current_branch() {
+  ref=$(git symbolic-ref HEAD 2> /dev/null) || \
+  ref=$(git rev-parse --short HEAD 2> /dev/null) || return
+  echo ${ref#refs/heads/}
+}
+
+function current_repository() {
+  ref=$(git symbolic-ref HEAD 2> /dev/null) || \
+  ref=$(git rev-parse --short HEAD 2> /dev/null) || return
+  echo $(git remote -v | cut -d':' -f 2)
+}
+
+# these aliases take advantage of the previous function
+alias ggpull='git pull origin $(current_branch)'
+alias ggpush='git push origin $(current_branch)'
+
+#Git Aliases AutoComplete
+type __git_complete >/dev/null 2>&1 && {
+    __git_complete   g        _git
+    __git_complete   ga       _git_add
+    __git_complete   gh       _git_log
+    __git_complete   gha      _git_log
+    __git_complete   gl       _git_pull
+    __git_complete   gp       _git_push
+    __git_complete   gb       _git_branch
+    __git_complete   gck      _git_checkout
+    __git_complete   gsw      _git_switch
+    __git_complete   gc       _git_commit
+    __git_complete   gd       _git_diff
+    __git_complete   gdc      _git_diff
+}
