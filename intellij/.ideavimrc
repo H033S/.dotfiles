@@ -80,10 +80,10 @@ nnoremap wj <c-w>j
 nnoremap wl <c-w>l
 nnoremap wh <c-w>h
 """Harpoon
-nmap <leader>wh <action>(HarpoonerOpenFile0)
-nmap <leader>wj <action>(HarpoonerOpenFile1)
-nmap <leader>wk <action>(HarpoonerOpenFile2)
-nmap <leader>wl <action>(HarpoonerOpenFile3)
+nmap <leader>wj <action>(HarpoonerOpenFile0)
+nmap <leader>wk <action>(HarpoonerOpenFile1)
+nmap <leader>wl <action>(HarpoonerOpenFile2)
+nmap <leader>w; <action>(HarpoonerOpenFile3)
 nmap <leader>hw <action>(HarpoonerQuickMenu)
 nmap <leader>ha <action>(HarpoonerAddFile)
 """ Activate Tool Windows
@@ -95,7 +95,7 @@ nmap <leader>vh <Action>(TypeHierarchy)
 nmap <leader>fu <Action>(FindUsages)
 nmap <leader>fg <Action>(FindInPath)
 nmap <leader>ff <Action>(GotoFile)
-nmap <leader>fb <Action>(Switcher)
+nmap <leader>fs <Action>(Switcher)
 nmap <leader>fi <Action>(GotoImplementation)
 nmap <leader>fd <Action>(GotoTypeDeclaration)
 nmap <leader>ft <Action>(GotoTest)
@@ -106,7 +106,7 @@ nmap <leader>eh <Action>(GotoPreviousError)
 """ Refactorings
 imap <M-h>            <Action>(ParameterInfo)
 nmap <leader><leader> <Action>(ShowHoverInfo)
-nmap <leader>re       <Action>(ReformatCode)
+nmap <leader>fb       <Action>(ReformatCode)
 nmap <leader>rt       <Action>(Refactorings.QuickListPopupAction)
 vmap <leader>rt       <Action>(Refactorings.QuickListPopupAction)
 nmap <leader>oi       <Action>(OptimizeImports)

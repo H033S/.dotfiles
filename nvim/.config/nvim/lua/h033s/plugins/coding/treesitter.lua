@@ -40,7 +40,8 @@ return {
 			"yaml",
 			"java",
 			"bash",
-            "graphql"
+            "graphql",
+            "kotlin"
 		},
 		incremental_selection = {
 			enable = true,
